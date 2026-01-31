@@ -2,7 +2,7 @@
 
 --changeset github-copilot:users-001
 -- Basic users table (PostgreSQL)
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS app1.users (
     id BIGSERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     username VARCHAR(50),
@@ -15,12 +15,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Enforce unique email
-ALTER TABLE users
+ALTER TABLE app1.users
     ADD CONSTRAINT uq_users_email UNIQUE (email);
 
 -- Helpful indexes
-CREATE INDEX IF NOT EXISTS idx_users_username ON users (username);
-CREATE INDEX IF NOT EXISTS idx_users_created_at ON users (created_at);
+CREATE INDEX IF NOT EXISTS idx_users_username ON app1.users (username);
+CREATE INDEX IF NOT EXISTS idx_users_created_at ON app1.users (created_at);
 
 --rollback DROP INDEX IF EXISTS idx_users_created_at;
 --rollback DROP INDEX IF EXISTS idx_users_username;

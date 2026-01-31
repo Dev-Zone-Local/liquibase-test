@@ -2,7 +2,7 @@
 
 --changeset niket:logs_v2_001
 -- Create a basic logs table for accumulation and querying
-CREATE TABLE logs (
+CREATE TABLE app1.logs (
     log_id        VARCHAR(36)  NOT NULL,
     tenant_id     VARCHAR(64)  NOT NULL,
     occurred_at   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,10 +21,10 @@ CREATE TABLE logs (
 );
 
 -- Useful indexes for common lookup patterns
-CREATE INDEX idx_logs_tenant_time ON logs (tenant_id, occurred_at);
-CREATE INDEX idx_logs_level_time  ON logs (level, occurred_at);
-CREATE INDEX idx_logs_trace       ON logs (trace_id);
-CREATE INDEX idx_logs_request     ON logs (request_id);
+CREATE INDEX idx_logs_tenant_time ON app1.logs (tenant_id, occurred_at);
+CREATE INDEX idx_logs_level_time  ON app1.logs (level, occurred_at);
+CREATE INDEX idx_logs_trace       ON app1.logs (trace_id);
+CREATE INDEX idx_logs_request     ON app1.logs (request_id);
 
 -- Simple daily rollup view for quick aggregation
 CREATE VIEW log_counts_daily AS
@@ -34,7 +34,7 @@ SELECT
     COALESCE(source_service, '') AS source_service,
     level,
     COUNT(*) AS total
-FROM logs
+FROM app1.logs
 GROUP BY CAST(occurred_at AS DATE), tenant_id, COALESCE(source_service, ''), level;
 
 --rollback DROP VIEW IF EXISTS log_counts_daily;
@@ -42,4 +42,4 @@ GROUP BY CAST(occurred_at AS DATE), tenant_id, COALESCE(source_service, ''), lev
 --rollback DROP INDEX IF EXISTS idx_logs_trace;
 --rollback DROP INDEX IF EXISTS idx_logs_level_time;
 --rollback DROP INDEX IF EXISTS idx_logs_tenant_time;
---rollback DROP TABLE IF EXISTS logs;
+--rollback DROP TABLE IF EXISTS app1.logs;
