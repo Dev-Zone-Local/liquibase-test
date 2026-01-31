@@ -1,0 +1,11 @@
+docker run --rm -v "D:/Projects/Personal/liquibase/app1:/liquibase/changelog" liquibase/liquibase:4.33.0 --defaultsFile=/liquibase/changelog/liquibase.properties --changelog-file=changelog.master.xml  validate 
+
+docker run --rm -v "D:/Projects/Personal/liquibase/app1:/liquibase/changelog" liquibase/liquibase:4.33.0 --defaultsFile=/liquibase/changelog/liquibase.properties --changelog-file=changelog.master.xml  update-sql
+
+docker run --rm -v "D:/Projects/Personal/liquibase/app1:/liquibase/changelog" liquibase/liquibase:4.33.0 --defaultsFile=/liquibase/changelog/liquibase.properties --changelog-file=changelog.master.xml  update
+
+docker run --rm -v "D:/Projects/Personal/liquibase/app1:/liquibase/changelog" liquibase/liquibase:4.33.0 --defaultsFile=/liquibase/changelog/liquibase.properties --changelog-file=changelog.master.xml  status --verbose
+
+docker run --rm -v "D:/Projects/Personal/liquibase/app1:/liquibase/changelog" liquibase/liquibase:4.33.0 --defaultsFile=/liquibase/changelog/liquibase.properties --changelog-file=changelog.master.xml  clearCheckSums
+
+docker run --rm -v "D:/Projects/Personal/liquibase/app1:/liquibase/changelog" liquibase/liquibase:4.33.0 --defaultsFile=/liquibase/changelog/liquibase.properties --changelog-file=changelog.master.xml  history
