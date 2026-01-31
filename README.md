@@ -29,7 +29,7 @@ docker run -d --name pgadmin \
   -p 8080:80 dpage/pgadmin4
 ```
 
-In pgAdmin4, add a server connection pointing to `host.docker.internal:5432`, database `app1`, user `postgres`, password `postgres`.
+In pgAdmin4, add a server connection pointing to `host.docker.internal:5432`, database `app1`, user `postgres`, password `admin`.
 
 ## Run Liquibase with Postgres (Docker)
 Use the mounted repo path and set the search path to the changelog directory.
@@ -42,7 +42,7 @@ docker run --rm \
   --searchPath=/liquibase/changelog \
   --changelog-file=changelog.master.xml \
   --url="jdbc:postgresql://host.docker.internal:5432/app1" \
-  --username=postgres --password=postgres \
+  --username=postgres --password=admin \
   validate
 
 # Status (pending changes)
@@ -53,7 +53,7 @@ docker run --rm \
   --searchPath=/liquibase/changelog \
   --changelog-file=changelog.master.xml \
   --url="jdbc:postgresql://host.docker.internal:5432/app1" \
-  --username=postgres --password=postgres \
+  --username=postgres --password=admin \
   status
 
 # Apply changes
@@ -64,13 +64,13 @@ docker run --rm \
   --searchPath=/liquibase/changelog \
   --changelog-file=changelog.master.xml \
   --url="jdbc:postgresql://host.docker.internal:5432/app1" \
-  --username=postgres --password=postgres \
+  --username=postgres --password=admin \
   update
 ```
 
 Note: The official Liquibase image includes the PostgreSQL JDBC driver; no extra classpath is required.
 
-## Run Liquibase with MySQL (Docker)
+<!-- ## Run Liquibase with MySQL (Docker)
 The Liquibase image may not include the MySQL Connector/J. Mount the driver and set `--classpath`.
 ```powershell
 # Download MySQL Connector/J JAR (once)
@@ -90,7 +90,7 @@ docker run --rm \
   --username=root --password= \
   --classpath=/liquibase/lib/mysql-connector-j-9.1.0.jar \
   validate
-```
+``` -->
 
 ## Tips
 - On Windows, use `host.docker.internal` from inside containers to reach services on the host.
